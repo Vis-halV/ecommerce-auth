@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import AuthCard from "../components/AuthCard";
 import TextInput from "../components/TextInput";
 import Toast from "../components/Toast";
@@ -33,7 +35,7 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white text-gray-900 px-4">
-      <AuthCard title="Login" className="bg-white border border-gray-200">
+      <AuthCard title="Login">
         <form onSubmit={handleSubmit} className="space-y-5">
 
           <TextInput
@@ -47,20 +49,29 @@ export default function Login() {
             inputClass="border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
           />
 
-          <TextInput
-            label="Password"
-            name="password"
-            type={showPassword ? "text" : "password"}
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            required
-            withToggle
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
-            labelClass="text-gray-700"
-            inputClass="border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-          />
+          <div className="w-full">
+            <label className="block text-sm font-medium mb-1 text-gray-700">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                value={form.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                required
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-2 flex items-center text-gray-500 px-2"
+              >
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </button>
+            </div>
+          </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
             <label className="flex items-center gap-2 text-gray-700">
@@ -88,12 +99,12 @@ export default function Login() {
             {loading ? <Loader size="sm" /> : "Login"}
           </button>
         </form>
- 
+
         <p className="mt-4 text-center text-sm text-gray-700">
           New user?{" "}
           <a
             href="/signup"
-            className="text-emerald-500 hover:text-emerald-700 font-medium"
+            className="text-indigo-600 hover:text-indigo-700 font-medium"
           >
             Sign Up
           </a>
